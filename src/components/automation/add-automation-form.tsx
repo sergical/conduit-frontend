@@ -37,11 +37,13 @@ export interface Condition {
   conditionType: "single" | "group";
   type: "and" | "or";
   token: TokenCondition;
+  conditions?: Condition[];
 }
 
 const defaultConditions: Condition[] = [
   {
     conditionType: "single",
+
     type: "and",
     token: {
       type: "more",
@@ -91,7 +93,15 @@ export default function AddAutomationForm({
       <CardContent className="p-3 border-b flex flex-col gap-4">
         <h3 className="text-muted-foreground text-sm uppercase">Conditions</h3>
         {conditions.map((condition, index) => (
-          <AutomationCondition key={index} condition={condition} />
+          <AutomationCondition
+            key={index}
+            condition={condition}
+            setCondition={(condition) => {
+              const newConditions = [...conditions];
+              newConditions[index] = condition;
+              setConditions(newConditions);
+            }}
+          />
         ))}
         <div className="flex gap-2">
           <Button

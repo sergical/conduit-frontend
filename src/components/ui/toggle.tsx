@@ -1,7 +1,6 @@
 "use client";
 import { LucideIcon } from "lucide-react";
 import React from "react";
-import { AutomationType } from "@/components/automation/add-automation-form";
 import { Button } from "@/components/ui/button";
 
 interface ToggleProps {
@@ -12,8 +11,8 @@ interface ToggleProps {
 
 interface Option {
   label: string;
-  icon: LucideIcon;
-  value: AutomationType;
+  icon?: LucideIcon;
+  value: string;
 }
 
 export default function Toggle({ options, selected, onChange }: ToggleProps) {
@@ -29,8 +28,8 @@ export default function Toggle({ options, selected, onChange }: ToggleProps) {
           size="sm"
           variant={"ghost"}
         >
-          <Icon className={`h-4 w-4`} />
-          <span className="ml-2">{label}</span>
+          {Icon && <Icon className={`h-4 w-4 mr-2`} />}
+          <span>{label}</span>
         </Button>
       ))}
     </div>
