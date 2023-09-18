@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
+import DataProvider from "@/components/apollo-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,17 +21,19 @@ export default function RootLayout({
     <html lang="en">
       <head />
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <header className="container p-4">
-            <ThemeToggle />
-          </header>
-          {children}
-        </ThemeProvider>
+        <DataProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <header className="container p-4">
+              <ThemeToggle />
+            </header>
+            {children}
+          </ThemeProvider>
+        </DataProvider>
       </body>
     </html>
   );
